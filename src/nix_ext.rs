@@ -40,14 +40,14 @@ pub fn setgroups(gids: &[libc::gid_t]) -> Result<()> {
 #[inline]
 pub fn setrlimit(
     resource: libc::c_int,
-    soft: libc::c_ulonglong,
-    hard: libc::c_ulonglong,
+    soft: libc::rlim_t,
+    hard: libc::rlim_t,
 ) -> Result<()> {
     let rlim = &libc::rlimit {
         rlim_cur: soft,
         rlim_max: hard,
     };
-    let res = unsafe { libc::setrlimit(resource, rlim) };
+    let res = unsafe { libc::setrlimit(resource as u32, rlim) };
     Errno::result(res).map(drop)
 }
 

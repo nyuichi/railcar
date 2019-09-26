@@ -7,3 +7,4 @@ authors = ["Vishvananda Ishaya Abrams <vish.ishaya@oracle.com>"]
 serde = "0.9"
 serde_json = "0.9"
 serde_derive = "0.9"
+libc = "0.2.21"

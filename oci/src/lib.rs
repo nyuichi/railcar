@@ -4,6 +4,7 @@ extern crate serde_derive;
 extern crate serde_json;
 extern crate serde;
 //extern crate nix;
+extern crate libc;
 
 pub mod serialize;
 
@@ -78,9 +79,9 @@ pub struct LinuxRlimit {
     #[serde(rename = "type")]
     pub typ: LinuxRlimitType,
     #[serde(default)]
-    pub hard: u64,
+    pub hard: libc::rlim_t,
     #[serde(default)]
-    pub soft: u64,
+    pub soft: libc::rlim_t,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy)]
@@ -518,6 +519,7 @@ pub enum LinuxSeccompAction {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy)]
+#[repr(u32)]
 pub enum Arch {
     SCMP_ARCH_NATIVE = 0x00000000,
     SCMP_ARCH_X86 = 0x40000003,
